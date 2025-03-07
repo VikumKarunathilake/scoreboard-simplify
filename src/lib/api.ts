@@ -4,7 +4,7 @@ import { toast } from '@/hooks/use-toast';
 
 // Create axios instance with baseURL
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://139.162.47.106:5000/api',
+  baseURL: 'https://scc.elixircraft.net:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },

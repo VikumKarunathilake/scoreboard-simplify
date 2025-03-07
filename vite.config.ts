@@ -7,9 +7,8 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 443,
     proxy: {
-      '/api': 'http://localhost:5000',  // The backend server URL
+      '/api': 'https://scc.elixircraft.net:5000',  // The backend server URL
     },
   },
   plugins: [

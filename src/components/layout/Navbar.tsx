@@ -8,7 +8,6 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
