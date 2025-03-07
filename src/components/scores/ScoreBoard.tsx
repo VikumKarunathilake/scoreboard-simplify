@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { scoresAPI } from "@/lib/api";
 import { Score } from "@/types";
@@ -29,10 +28,10 @@ export default function ScoreBoard() {
   const getHouseColorClass = (houseName: string) => {
     for (const [key, house] of Object.entries(HOUSES)) {
       if (house.name.toLowerCase() === houseName.toLowerCase()) {
-        return house.colorClass;
+        return house.colorClass; // The colorClass property should be in your HOUSES definition
       }
     }
-    return "bg-gray-400"; // Default color
+    return "bg-gray-400"; // Default color if no match
   };
 
   const getMaxScore = () => {
@@ -60,7 +59,7 @@ export default function ScoreBoard() {
     );
   }
 
-  const maxScore = getMaxScore();
+  const maxScore = 1500;
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm animate-scale-in">
@@ -69,7 +68,7 @@ export default function ScoreBoard() {
         {sortedScores.map((score) => {
           const progressPercentage = maxScore > 0 ? (score.score / maxScore) * 100 : 0;
           const colorClass = getHouseColorClass(score.house);
-          
+
           return (
             <div key={score.id} className="space-y-2">
               <div className="flex justify-between mb-1">
@@ -77,7 +76,7 @@ export default function ScoreBoard() {
                 <span className="font-semibold">{score.score}</span>
               </div>
               <div className="h-8 bg-secondary rounded-full overflow-hidden">
-                <div 
+                <div
                   className={cn("h-full transition-all duration-1000 ease-out", colorClass)}
                   style={{ width: `${progressPercentage}%` }}
                 ></div>

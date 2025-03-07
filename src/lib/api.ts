@@ -4,19 +4,16 @@ import { toast } from '@/hooks/use-toast';
 
 // Create axios instance with baseURL
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://139.162.47.106:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Ensures cookies are sent with each request
 });
 
 // Add request interceptor to include auth token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
     return config;
   },
   (error) => {

@@ -12,7 +12,6 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Index from "@/pages/Index";
 import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
-import Events from "@/pages/Events";
 import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
 
@@ -28,7 +27,6 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/events" element={<Events />} />
               <Route path="/admin" element={
                 <ProtectedRoute requireAdmin>
                   <Admin />

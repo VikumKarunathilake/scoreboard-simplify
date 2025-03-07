@@ -18,23 +18,9 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
-          <Trophy className="h-6 w-6 text-primary" />
+        <img src="logo.gif" alt="Logo" className="h-12 w-12" />
           <Link to="/" className="text-xl font-semibold">Sports Meet Live Scores</Link>
         </div>
-        
-        <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
-            Home
-          </Link>
-          <Link to="/events" className="text-sm font-medium transition-colors hover:text-primary">
-            Events
-          </Link>
-          {user?.isAdmin && (
-            <Link to="/admin" className="text-sm font-medium transition-colors hover:text-primary">
-              Admin
-            </Link>
-          )}
-        </nav>
         
         <div className="flex items-center gap-4">
           {isAuthenticated ? (
@@ -50,6 +36,9 @@ export default function Navbar() {
                 <DropdownMenuItem className="font-medium">
                   Signed in as {user?.username}
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                    <Link to="/">Home</Link>
+                  </DropdownMenuItem>
                 {user?.isAdmin && (
                   <DropdownMenuItem asChild>
                     <Link to="/admin">Admin Dashboard</Link>

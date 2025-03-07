@@ -25,14 +25,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check if user is logged in
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
       } catch (error) {
-        console.error('Failed to parse stored user', error);
-        localStorage.removeItem('user');
+        console.error("Failed to parse stored user", error);
+        localStorage.removeItem("user");
       }
     }
     setLoading(false);
@@ -43,21 +43,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       const response = await authAPI.login(username, password);
       
-      // For demo purposes, set admin status for 'admin' username
-      const isAdmin = username.toLowerCase() === 'admin';
-      
+      // Ensure the backend sends a `role` field
+      const { role } = response.data;
+      const isAdmin = role === "admin";
+  
       const userData = { username, isAdmin };
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
       
       toast({
         title: "Success!",
         description: "You've successfully logged in.",
       });
-      
+  
       return response.data;
     } catch (error) {
-      console.error('Login failed', error);
+      console.error("Login failed", error);
       throw error;
     } finally {
       setLoading(false);
@@ -85,6 +86,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
     setUser(null);
     toast({
       title: "Logged out",
